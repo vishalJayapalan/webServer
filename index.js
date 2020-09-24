@@ -1,5 +1,8 @@
 import net from 'net'
 
+import requestParser from './requestParser.js'
+import response from './response.js'
+
 const server = net.createServer()
 
 server.on('connection', socket => {
@@ -7,13 +10,17 @@ server.on('connection', socket => {
   console.log('New Client connected on ', remoteAddress)
 
   socket.on('data', data => {
-    console.log(data + 'received from client')
-    socket.write(`Server Reply : ${data}`)
+    const requestObject = requestParser(data)
+
+    const res = response(requestObject)
+    console.log(res)
+    socket.write(res)
   })
 
   socket.on('end', () => {
     console.log('Connection closed')
   })
+
   socket.once('close', () => {
     console.log(`Connection from ${remoteAddress} closed`)
   })
