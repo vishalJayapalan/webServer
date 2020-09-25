@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-const response = requestObject => {
+const createResponse = requestObject => {
   let res = ''
   if (requestObject.method === 'GET') {
     if (requestObject.requestUri === '/') {
@@ -27,4 +27,4 @@ const response = requestObject => {
   return res
 }
 
-export default response
+export default createResponse

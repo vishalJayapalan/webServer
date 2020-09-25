@@ -1,7 +1,7 @@
 import net from 'net'
 
 import requestParser from './requestParser.js'
-import response from './response.js'
+import createResponse from './serveStaticFile.js'
 
 const server = net.createServer()
 
@@ -12,7 +12,7 @@ server.on('connection', socket => {
   socket.on('data', data => {
     const requestObject = requestParser(data)
 
-    const res = response(requestObject)
+    const res = createResponse(requestObject)
     console.log(res)
     socket.write(res)
   })
