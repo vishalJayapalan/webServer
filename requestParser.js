@@ -1,7 +1,9 @@
 const requestParser = data => {
+  // const requestHeaderObject = {}
+  // const requestBodyObject = {}
   const requestObject = {}
   const request = data.toString().split(/\r\n/)
-  // console.log(request)
+  console.log('request', request)
   const requestLine = request[0]
 
   const [method, requestUri, version] = requestLine.split(' ')
